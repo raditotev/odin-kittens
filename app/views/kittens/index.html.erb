@@ -1,0 +1,14 @@
+<h1>Index page</h1>
+
+<p><%= link_to "Add new Kitten", new_kitten_path %></p>
+
+<% if @kittens.any? %>
+  <% @kittens.each do |kitten| %>
+    <h2><%= link_to kitten.name, kitten_path(kitten) %></h2>
+    <p><%= kitten.age %></p>
+    <p><%= kitten.cuteness %></p>
+    <p><%= kitten.softness %></p>
+  <% end %>
+<% else %>
+  <strong>There are no kittens!</strong>
+<% end %>

@@ -10,6 +10,12 @@ class KittensController < ApplicationController
 
   def create
     @kitten = Kitten.new(kitten_params)
+    if @kitten.save
+      flash[:success] = "Successfully saved"
+      redirect_to @kitten
+    else
+      flash[:error] = "Problem saving this entry!"
+    end
   end
 
   def show
@@ -21,18 +27,27 @@ class KittensController < ApplicationController
   end
 
   def update
-    @kitten = Kitten.update(kitten_params)
+    @kitten = Kitten.find(params[:id])
+    @kitten.update_attributes(kitten_params)
+    if @kitten.save
+      flash[:success] = "Successfully updated"
+      redirect_to @kitten
+    else
+      flash[:error] = "Update failed!"
+    end
   end
 
   def destroy
     kitten = Kitten.find(params[:id])
     kitten.destroy
+    flash[:success] = "Successfully deleted!"
+    redirect_to root_url
   end
 
   private
 
   def kitten_params
-    params.request(:kitten).permit(:name, :age, :cuteness, :softness)
+    params.require(:kitten).permit(:name, :age, :cuteness, :softness)
   end
 
 end

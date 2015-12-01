@@ -1,0 +1,11 @@
+<h1><%= @kitten.name %>'s Profile</h1>
+
+  <p><%= @kitten.age %></p>
+  <p><%= @kitten.cuteness %></p>
+  <p><%= @kitten.softness %></p>
+
+  <p>
+    <%= link_to "Edit", edit_kitten_path(@kitten) %>
+    <%= link_to "Destroy", kitten_path(@kitten), method: "delete" %>
+
+  </p>
